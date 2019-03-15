@@ -17,7 +17,7 @@ function run()
 }
 
 
-git archive -o nodejs.tar.gz HEAD $(git ls-files --modified)
+tar czf nodejs.tar.gz --exclude='*.sh' $(git diff --name-only HEAD^)
 sshpass -p $PASSWORD scp -P $PORT nodejs.tar.gz $SERVER:$APP_DIR
 rm -rf nodejs.tar.gz
 
